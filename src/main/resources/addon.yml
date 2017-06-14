@@ -1,0 +1,5 @@
+name: KitsAddon
+author: AlphaHelix
+version: 1.0
+description: Adds in Kits
+main: de.alphahelix.kitsaddon.KitsAddon
