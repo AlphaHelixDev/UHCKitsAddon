@@ -4,10 +4,13 @@ import de.alphahelix.alphalibary.kits.Kit;
 import de.alphahelix.alphalibary.utils.Util;
 import de.alphahelix.kitsaddon.files.KitFile;
 import de.alphahelix.kitsaddon.instances.KitOptions;
+import de.alphahelix.kitsaddon.instances.KitSBObject;
 import de.alphahelix.kitsaddon.inventories.KitInventory;
 import de.alphahelix.uhcremastered.UHC;
 import de.alphahelix.uhcremastered.addons.core.Addon;
 import de.alphahelix.uhcremastered.enums.GState;
+import de.alphahelix.uhcremastered.events.game.ScoreboardSetEvent;
+import de.alphahelix.uhcremastered.utils.ScoreboardUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,6 +51,12 @@ public class KitsAddon extends Addon {
                     Util.runLater(2, false, () ->
                             e.getPlayer().getInventory().setItem(getKitOptions().getIcon().getSlot(), getKitOptions().getIcon().getItemStack())
                     );
+            }
+
+            @EventHandler
+            public void onSet(ScoreboardSetEvent e) {
+                ScoreboardUtil.addLobbyScoreboardObject(e.getPlayer(), new KitSBObject(e.getPlayer()));
+                ScoreboardUtil.addInGameScoreboardObject(e.getPlayer(), new KitSBObject(e.getPlayer()));
             }
         }, UHC.getInstance());
 
